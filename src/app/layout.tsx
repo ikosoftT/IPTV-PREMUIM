@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.iflexiptv.com'),
+  metadataBase: new URL('https://www.iflexiptv.net'),
   title: {
     default: "iflexiptv - Premium IPTV Subscription Service",
     template: "%s | iflexiptv",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "iflexiptv - Premium IPTV Subscription Service",
     description: "Experience the ultimate premium IPTV service with iflexiptv. 4K & FHD channels, global sports, movies, and VODs.",
-    url: "https://www.iflexiptv.com",
+    url: "https://www.iflexiptv.net",
     siteName: "iflexiptv",
     images: [
       {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://www.iflexiptv.com",
+    canonical: "https://www.iflexiptv.net",
   },
 };
 

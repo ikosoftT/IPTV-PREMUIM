@@ -134,7 +134,7 @@ export default function DevicesPage() {
               href={whatsappSetupGuidanceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="button-glow inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-brand-hover"
+              className="button-glow-success inline-flex h-12 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
             >
               Get Setup Guidance on WhatsApp
               <ArrowRight className="h-5 w-5" />

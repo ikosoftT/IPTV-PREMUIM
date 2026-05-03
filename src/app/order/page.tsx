@@ -20,15 +20,13 @@ export default async function OrderPage({
 
   const selectedPlan = (() => {
     switch (plan) {
-      case "1m":
-        return { name: "1 Month", price: "$14.99" };
       case "3m":
-        return { name: "3 Months", price: "$34.99" };
+        return { name: "3 Months", price: "$34" };
       case "12m":
-        return { name: "12 Months", price: "$79.99" };
+        return { name: "12 Months", price: "$67" };
       case "6m":
       default:
-        return { name: "6 Months", price: "$49.99" };
+        return { name: "6 Months", price: "$49" };
     }
   })();
 

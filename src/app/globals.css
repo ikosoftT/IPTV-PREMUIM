@@ -1,28 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #f4c76b;
-  --color-brand-hover: #ffd98a;
-  --color-accent: #34d399;
-  --color-background: #050506;
-  --color-foreground: #f8fafc;
-  --color-card: #111113;
-  --color-card-foreground: #fafafa;
-  --color-border: #2a2a30;
-  --color-muted: #202027;
-  --color-muted-foreground: #a7a7b3;
+  --color-brand: #eab308;
+  --color-brand-hover: #facc15;
+  --color-accent: #3b82f6;
+  --color-success: #16a34a;
+  --color-success-hover: #15803d;
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-card: #0a0a0a;
+  --color-card-foreground: #ffffff;
+  --color-border: #262626;
+  --color-muted: #171717;
+  --color-muted-foreground: #a3a3a3;
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #050506;
-  --foreground: #f8fafc;
-  --luxe-gold: #f4c76b;
-  --luxe-cyan: #38bdf8;
-  --luxe-rose: #fb7185;
-  --luxe-emerald: #34d399;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {
@@ -30,10 +28,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   background-image:
-    radial-gradient(circle at 20% 10%, rgba(244, 199, 107, 0.12), transparent 28rem),
-    radial-gradient(circle at 80% 0%, rgba(56, 189, 248, 0.08), transparent 24rem),
-    linear-gradient(180deg, #050506 0%, #08080a 42%, #050506 100%);
-  @apply antialiased selection:bg-brand selection:text-background;
+    radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.05), transparent 32rem),
+    radial-gradient(circle at 85% 5%, rgba(234, 179, 8, 0.05), transparent 28rem),
+    linear-gradient(180deg, #000000 0%, #050505 40%, #000000 100%);
+  @apply antialiased selection:bg-brand selection:text-black;
 }
 
 button,
@@ -45,22 +43,47 @@ textarea {
 }
 
 .luxury-surface {
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
-    rgba(17, 17, 19, 0.82);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
-  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 10, 0.8);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(24px);
 }
 
+/* Hardcoded explicit buttons to ensure they ALWAYS look like buttons */
 .button-glow {
-  box-shadow:
-    0 0 0 1px rgba(244, 199, 107, 0.35),
-    0 18px 50px rgba(244, 199, 107, 0.2);
+  background-color: #eab308 !important;
+  color: #000000 !important;
+  border-radius: 9999px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  box-shadow: 0 0 0 1px rgba(234, 179, 8, 0.5), 0 10px 30px rgba(234, 179, 8, 0.3) !important;
+}
+.button-glow:hover {
+  background-color: #facc15 !important;
+  transform: translateY(-2px);
+}
+
+.button-glow-success {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.5), 0 10px 30px rgba(22, 163, 74, 0.3) !important;
+}
+.button-glow-success:hover {
+  background-color: #15803d !important;
+  transform: translateY(-2px);
 }
 
 .cta-pulse {
   animation: ctaPulse 2.8s ease-in-out infinite;
+}
+
+.cta-pulse-success {
+  animation: ctaPulseSuccess 2.8s ease-in-out infinite;
 }
 
 .reveal-up {
@@ -69,55 +92,73 @@ textarea {
 
 .cinema-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, transparent, black 14%, black 72%, transparent);
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 80%, transparent);
 }
 
 @keyframes ctaPulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(244, 199, 107, 0.34),
-      0 18px 50px rgba(244, 199, 107, 0.22);
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4), 0 10px 30px rgba(234, 179, 8, 0.2);
   }
   50% {
-    box-shadow:
-      0 0 0 10px rgba(244, 199, 107, 0),
-      0 18px 60px rgba(244, 199, 107, 0.34);
+    box-shadow: 0 0 0 10px rgba(234, 179, 8, 0), 0 10px 40px rgba(234, 179, 8, 0.4);
+  }
+}
+
+@keyframes ctaPulseSuccess {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4), 0 10px 30px rgba(22, 163, 74, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0), 0 10px 40px rgba(22, 163, 74, 0.4);
   }
 }
 
 @keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cta-pulse,
-  .reveal-up {
-    animation: none;
-  }
+  .cta-pulse, .cta-pulse-success, .reveal-up { animation: none; }
 }
 
-/* Custom scrollbar for premium feel */
-::-webkit-scrollbar {
-  width: 10px;
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 8)); } /* Assuming 8 unique logos of 250px avg width */
 }
-::-webkit-scrollbar-track {
-  background: var(--background);
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
 }
-::-webkit-scrollbar-thumb {
-  background: #3b3b42;
-  border-radius: 5px;
+
+/* Embla Carousel Base Styles */
+.embla {
+  overflow: hidden;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #575761;
+.embla__container {
+  display: flex;
+  touch-action: pan-y;
+  margin-left: -1rem; /* gap */
 }
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding-left: 1rem;
+}
+@media (min-width: 640px) {
+  .embla__slide { flex: 0 0 50%; }
+}
+@media (min-width: 1024px) {
+  .embla__slide { flex: 0 0 33.3333%; }
+}
+@media (min-width: 1280px) {
+  .embla__slide { flex: 0 0 25%; }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #404040; }

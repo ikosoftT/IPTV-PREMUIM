@@ -29,19 +29,19 @@ export default function Footer() {
             <h3 className="text-sm font-semibold mb-4 text-foreground tracking-wider uppercase">Navigation</h3>
             <ul className="space-y-3">
               <li><Link href="/" className="text-sm text-muted-foreground hover:text-brand transition-colors">Home</Link></li>
-              <li><Link href="/pricing" className="text-sm text-muted-foreground hover:text-brand transition-colors">Pricing</Link></li>
               <li><Link href="/features" className="text-sm text-muted-foreground hover:text-brand transition-colors">Features</Link></li>
               <li><Link href="/channels" className="text-sm text-muted-foreground hover:text-brand transition-colors">Channels</Link></li>
-              <li><Link href="/devices" className="text-sm text-muted-foreground hover:text-brand transition-colors">Devices</Link></li>
+              <li><Link href="/pricing" className="text-sm text-muted-foreground hover:text-brand transition-colors">Pricing</Link></li>
+              <li><Link href="/blog" className="text-sm text-muted-foreground hover:text-brand transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-foreground tracking-wider uppercase">Support</h3>
+            <h3 className="text-sm font-semibold mb-4 text-foreground tracking-wider uppercase">Support & Guides</h3>
             <ul className="space-y-3">
+              <li><Link href="/support" className="text-sm text-muted-foreground hover:text-brand transition-colors">Help & Support</Link></li>
+              <li><Link href="/guides" className="text-sm text-muted-foreground hover:text-brand transition-colors">Setup Guides</Link></li>
               <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-brand transition-colors">FAQ</Link></li>
-              <li><Link href="/contact" className="text-sm text-muted-foreground hover:text-brand transition-colors">Contact Us</Link></li>
-              <li><Link href="/devices#setup-guidance" className="text-sm text-muted-foreground hover:text-brand transition-colors">Setup Guides</Link></li>
               <li><Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors">Terms of Service</Link></li>
               <li><Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors">Privacy Policy</Link></li>
             </ul>
