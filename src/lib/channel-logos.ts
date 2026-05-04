@@ -93,6 +93,12 @@ export const CHANNEL_LOGOS: ChannelLogo[] = [
     alt: "MBC logo",
     category: "arabic",
   },
+   {
+    name: "NETFLIX",
+    src: "/imgs/logos/logo11.webp",
+    alt: "NETFLIX logo",
+    category: "arabic",
+  },
 ];
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -171,7 +177,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     id: 10,
     src: "/imgs/movies/movie_10.webp",
     alt: "Movie poster 10",
-  },
+  }
 ];
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -185,8 +191,7 @@ export const DOCUMENTARY_LOGOS = CHANNEL_LOGOS.filter((l) => l.category === "doc
 export const KIDS_LOGOS = CHANNEL_LOGOS.filter((l) => l.category === "kids");
 export const ARABIC_LOGOS = CHANNEL_LOGOS.filter((l) => l.category === "arabic");
 
-// Animated strip — best mix across all categories (using first 10 logos)
-export const STRIP_LOGOS = CHANNEL_LOGOS.slice(0, 10);
+export const STRIP_LOGOS = CHANNEL_LOGOS.slice(0, 11);
 
 // ══════════════════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS

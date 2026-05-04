@@ -6,7 +6,7 @@ const SCROLL = [...STRIP_LOGOS, ...STRIP_LOGOS, ...STRIP_LOGOS];
 
 export default function AnimatedLogos() {
   return (
-    <div className="w-full overflow-hidden bg-black py-10 border-y border-white/5 relative group/strip">
+    <div className="w-full overflow-hidden  py-10 border-y border-white/5 relative group/strip">
       {/* Fade masks */}
       <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-36 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
@@ -16,7 +16,7 @@ export default function AnimatedLogos() {
           <div key={`${logo.name}-${i}`} className="mx-4 sm:mx-6 flex-shrink-0">
             <div
               title={logo.name}
-              className="flex items-center justify-center w-28 h-14 sm:w-36 sm:h-16 rounded-xl bg-white/[0.04] border border-white/[0.07] backdrop-blur grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:bg-white/[0.12] hover:border-white/25 hover:scale-110 transition-all duration-300 px-4 py-2 shadow-[0_2px_16px_rgba(0,0,0,0.4)]"
+              className="flex items-center justify-center w-28 h-14 sm:w-36 sm:h-16 rounded-xl bg-white border border-white/[0.07] opacity-100 hover:grayscale-0  hover:scale-110 transition-all duration-300 px-4 py-2 shadow-[0_2px_16px_rgba(0,0,0,0.4)]"
             >
               {/* Using a standard <img> tag to avoid Next.js Image optimization blocking external SVG-rendered PNGs */}
               {/* eslint-disable-next-line @next/next/no-img-element */}

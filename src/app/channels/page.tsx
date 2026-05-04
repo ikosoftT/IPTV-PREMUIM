@@ -89,7 +89,7 @@ export default function Home() {
   const pricingPlans = [
     {
       months: "3 Months",
-      price: "€34.99",
+      price: "€34",
       perMonth: "€11.66/mo",
       tag: null,
       tagType: "none",
@@ -99,7 +99,7 @@ export default function Home() {
     },
     {
       months: "6 Months",
-      price: "€49.99",
+      price: "€49",
       perMonth: "€8.33/mo",
       tag: "Most Popular",
       tagType: "popular",
@@ -109,7 +109,7 @@ export default function Home() {
     },
     {
       months: "12 Months",
-      price: "€79.99",
+      price: "€67",
       perMonth: "€6.67/mo",
       tag: "Best Value",
       tagType: "best",
@@ -557,7 +557,7 @@ export default function Home() {
           2 · ANIMATED LOGOS
       ══════════════════════════════════════════════════ */}
       <div style={{
-        background: "#080810",
+
         borderTop: "1px solid rgba(242,200,71,0.07)",
         borderBottom: "1px solid rgba(242,200,71,0.07)"
       }}>
@@ -587,11 +587,11 @@ export default function Home() {
 
           <EmblaSlider delay={3500}>
             {[
-              { title: "World Cup 2030", img: "/imgs/bg_sliders/bg_slider_1.webp" },
-              { title: "Champions League", img: "/imgs/movies/movie_8.webp" },
-              { title: "La Liga", img: "/imgs/movies/movie_9.webp" },
-              { title: "Premier League", img: "/imgs/bg_sliders/bg_slider_2.webp" },
-              { title: "UFC & Boxing", img: "/imgs/movies/movie_10.webp" },
+              { title: "World Cup 2030", img: "/imgs/sports/bg1.webp" },
+              { title: "Champions League", img: "/imgs/sports/bg2.jpg" },
+              { title: "La Liga", img: "/imgs/sports/bg3.jpg" },
+              { title: "Premier League", img: "/imgs/sports/bg4.jpg" },
+              { title: "UFC & Boxing",img: "/imgs/sports/bg5.jpg" },
             ].map((card, i) => (
               <div key={i} className="card-hover relative aspect-video overflow-hidden rounded-2xl group"
                 style={{ border: "1px solid rgba(242,200,71,0.12)", background: "#0B0B14", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>

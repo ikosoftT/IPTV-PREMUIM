@@ -3,7 +3,7 @@ const pexels = (id: string, width = 1800) =>
 
 export const premiumVideos = {
   heroMovieClip:
-    "https://videos.pexels.com/video-files/7986784/7986784-sd_960_506_25fps.mp4",
+    "https://imdb-video.media-imdb.com/vi973841433/1434659607842-pgv4ql-1616202708102.mp4?Expires=1777937916&Signature=LvTF7qiqPFsVFo1cXdTETZl-uwvWQmV00k9PId0KYdYv0A4vsJi1dOWkPssi1SrQFeVfgP~B3I~JSvG33ThR0wrJ2sNjBwpfrcoyf7hHBPTg6TZ~aqjU81vKYh2Uz81cplOaXfyBQfOod1aZAkAIk3y0wuPhVaTW5lxxkIw4-tzEffkXtnkAAx6mEBsNWU650ecBWrEx99Em84G8pPJrubhSxACAYW5bHR0b4oqctjjHcEcaGBkFKxVpdpFVenJNsXHOa7~Br4mPNulTbMr66U02fE7TR4S~bFFOiqTKNp20jUu7Djm6zotn0e6mUbMDWF94eS70YGblETlXnuYcAA__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA",
 };
 
 export const premiumImages = {
