@@ -90,75 +90,160 @@ export default function Home() {
     },
   ];
 
-
-
   const latestPosts = blogPosts.slice(0, 4);
 
   return (
     <>
       <SchemaMarkup schema={schema} />
 
-      {/* ─────────────────────────────────────────────────────────
-          GLOBAL LUXURY DESIGN TOKENS
-      ───────────────────────────────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════
+          GLASSMORPHISM DESIGN SYSTEM
+      ═══════════════════════════════════════════════════ */}
       <style>{`
-        /* ── Gold palette ── */
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+        /* ── Root aurora palette ── */
         :root {
           --g1: #C9A020;
           --g2: #F2C847;
           --g3: #F9E08A;
-          --ink: #05050A;
-          --s1:  #08080F;
-          --s2:  #0B0B16;
+          --ink: #010110;
+          --deep: #02020E;
+          --mid:  #06061A;
+          /* Glass layers */
+          --glass-white:     rgba(255,255,255,0.05);
+          --glass-white-md:  rgba(255,255,255,0.09);
+          --glass-white-hi:  rgba(255,255,255,0.14);
+          --glass-gold:      rgba(242,200,71,0.07);
+          --glass-gold-md:   rgba(242,200,71,0.12);
+          --glass-gold-hi:   rgba(242,200,71,0.18);
+          --border-white:    rgba(255,255,255,0.10);
+          --border-gold:     rgba(242,200,71,0.22);
+          --border-gold-hi:  rgba(242,200,71,0.45);
+          --blur-sm:  blur(12px);
+          --blur-md:  blur(20px);
+          --blur-lg:  blur(32px);
         }
 
-        /* ── Grain overlay ── */
+        * { font-family: 'DM Sans', sans-serif; }
+        h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+        /* ── Aurora background (shared across sections) ── */
+        .aurora-bg {
+          background: radial-gradient(ellipse 110% 80% at 60% -10%, rgba(242,200,71,0.13) 0%, transparent 55%),
+                      radial-gradient(ellipse 80% 60% at 10% 40%, rgba(120,60,220,0.12) 0%, transparent 55%),
+                      radial-gradient(ellipse 70% 50% at 90% 60%, rgba(200,120,20,0.10) 0%, transparent 50%),
+                      radial-gradient(ellipse 100% 70% at 50% 100%, rgba(242,200,71,0.07) 0%, transparent 60%),
+                      #02020E;
+        }
+
+        /* ── Noise grain overlay ── */
         .grain::after {
           content: "";
           position: absolute;
           inset: 0;
           pointer-events: none;
           z-index: 2;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-          background-size: 160px 160px;
+          opacity: 0.025;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          background-size: 128px 128px;
         }
 
-        /* ── Gold shimmer line ── */
-        .gold-line {
-          height: 1px;
-          background: linear-gradient(90deg, transparent 0%, rgba(242,200,71,0.5) 30%, rgba(249,224,138,0.8) 50%, rgba(242,200,71,0.5) 70%, transparent 100%);
+        /* ══════════════════════════════
+           GLASS CARD SYSTEM
+        ══════════════════════════════ */
+
+        /* ── Base glass card ── */
+        .glass-card {
+          background: var(--glass-white);
+          backdrop-filter: var(--blur-md) saturate(160%);
+          -webkit-backdrop-filter: var(--blur-md) saturate(160%);
+          border: 1px solid var(--border-white);
+          box-shadow:
+            0 8px 32px rgba(0,0,0,0.45),
+            0 2px 8px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.08),
+            inset 0 -1px 0 rgba(0,0,0,0.2);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .glass-card:hover {
+          background: var(--glass-white-md);
+          border-color: var(--border-gold);
+          box-shadow:
+            0 20px 60px rgba(0,0,0,0.55),
+            0 0 40px rgba(242,200,71,0.10),
+            inset 0 1px 0 rgba(255,255,255,0.12),
+            inset 0 -1px 0 rgba(242,200,71,0.05);
+          transform: translateY(-6px);
         }
 
-        /* ── Ambient glow orb ── */
-        .g-orb {
-          position: absolute;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(242,200,71,0.15) 0%, transparent 70%);
-          pointer-events: none;
-          z-index: 0;
+        /* ── Gold glass card ── */
+        .glass-card-gold {
+          background: var(--glass-gold);
+          backdrop-filter: var(--blur-md) saturate(180%);
+          -webkit-backdrop-filter: var(--blur-md) saturate(180%);
+          border: 1px solid var(--border-gold);
+          box-shadow:
+            0 8px 40px rgba(0,0,0,0.5),
+            0 0 30px rgba(242,200,71,0.08),
+            inset 0 1px 0 rgba(242,200,71,0.10),
+            inset 0 -1px 0 rgba(0,0,0,0.15);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .glass-card-gold:hover {
+          background: var(--glass-gold-md);
+          border-color: var(--border-gold-hi);
+          box-shadow:
+            0 24px 70px rgba(0,0,0,0.6),
+            0 0 55px rgba(242,200,71,0.20),
+            inset 0 1px 0 rgba(242,200,71,0.14),
+            inset 0 -1px 0 rgba(242,200,71,0.04);
+          transform: translateY(-8px);
         }
 
-        /* ── Gold text gradient ── */
-        .tg {
-          background: linear-gradient(130deg, #C9A020 0%, #F2C847 40%, #F9E08A 65%, #C9A020 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        /* ── Feature image card (with full-bleed image) ── */
+        .glass-feat-card {
+          backdrop-filter: var(--blur-sm);
+          -webkit-backdrop-filter: var(--blur-sm);
+          border: 1px solid rgba(255,255,255,0.10);
+          transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+          overflow: hidden;
+        }
+        .glass-feat-card:hover {
+          border-color: var(--border-gold);
+          box-shadow:
+            0 0 0 1px rgba(242,200,71,0.25),
+            0 32px 80px rgba(0,0,0,0.7),
+            0 0 60px rgba(242,200,71,0.15);
+          transform: translateY(-8px) scale(1.01);
         }
 
-        /* ── Gold badge ── */
-        .gold-badge {
-          background: linear-gradient(130deg, #F2C847 0%, #F9E08A 50%, #C9A020 100%);
-          color: #07070D;
-          box-shadow: 0 0 18px rgba(242,200,71,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
+        /* ─────────────────────────────────
+           INSET GLASS PANEL (inside cards)
+        ───────────────────────────────── */
+        .glass-inset {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.08);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          border-radius: 14px;
         }
 
-        /* ── Primary gold button ── */
+        /* ══════════════════════════════
+           BUTTONS
+        ══════════════════════════════ */
+
+        /* ── Gold button ── */
         .btn-gold {
           background: linear-gradient(130deg, #F2C847 0%, #F9E08A 45%, #C9A020 100%);
           color: #07070D;
           font-weight: 800;
-          box-shadow: 0 4px 22px rgba(242,200,71,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+          font-family: 'Syne', sans-serif;
+          letter-spacing: 0.02em;
+          box-shadow:
+            0 4px 22px rgba(242,200,71,0.45),
+            0 1px 0 rgba(255,255,255,0.2) inset,
+            0 -1px 0 rgba(0,0,0,0.3) inset;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           position: relative;
           overflow: hidden;
@@ -168,7 +253,7 @@ export default function Home() {
           position:absolute;
           inset:0;
           border-radius:inherit;
-          background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+          background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
           background-size: 250% 100%;
           background-position: 200% 0;
           animation: sheen 3.5s ease-in-out infinite;
@@ -179,67 +264,97 @@ export default function Home() {
         }
         .btn-gold:hover {
           transform: translateY(-3px);
-          box-shadow: 0 8px 36px rgba(242,200,71,0.65), inset 0 1px 0 rgba(255,255,255,0.35);
+          box-shadow: 0 8px 36px rgba(242,200,71,0.6), inset 0 1px 0 rgba(255,255,255,0.3);
         }
 
-        /* ── Ghost gold button ── */
-        .btn-ghost {
-          background: rgba(242,200,71,0.06);
-          border: 1px solid rgba(242,200,71,0.28);
-          color: #F2C847;
+        /* ── Ghost glass button ── */
+        .btn-glass {
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: var(--blur-sm);
+          -webkit-backdrop-filter: var(--blur-sm);
+          border: 1px solid rgba(255,255,255,0.18);
+          color: rgba(255,255,255,0.88);
+          font-family: 'Syne', sans-serif;
+          font-weight: 600;
           transition: all 0.3s ease;
         }
-        .btn-ghost:hover {
+        .btn-glass:hover {
           transform: translateY(-3px);
-          background: rgba(242,200,71,0.12);
-          border-color: rgba(242,200,71,0.55);
-          box-shadow: 0 0 28px rgba(242,200,71,0.22);
+          background: rgba(255,255,255,0.10);
+          border-color: rgba(242,200,71,0.45);
+          color: #F2C847;
+          box-shadow: 0 0 28px rgba(242,200,71,0.18), 0 8px 30px rgba(0,0,0,0.4);
         }
 
-        /* ── Card hover ── */
-        .card-hover {
-          transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+        /* ── Gold ghost button ── */
+        .btn-ghost-gold {
+          background: rgba(242,200,71,0.07);
+          backdrop-filter: var(--blur-sm);
+          -webkit-backdrop-filter: var(--blur-sm);
+          border: 1px solid rgba(242,200,71,0.28);
+          color: #F2C847;
+          font-family: 'Syne', sans-serif;
+          font-weight: 600;
+          transition: all 0.3s ease;
         }
-        .card-hover:hover {
-          border-color: rgba(242,200,71,0.45) !important;
-          box-shadow: 0 0 50px rgba(242,200,71,0.14), 0 24px 64px rgba(0,0,0,0.75) !important;
-          transform: translateY(-6px);
+        .btn-ghost-gold:hover {
+          transform: translateY(-3px);
+          background: rgba(242,200,71,0.14);
+          border-color: rgba(242,200,71,0.55);
+          box-shadow: 0 0 32px rgba(242,200,71,0.25), 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        /* ══════════════════════════════
+           TYPOGRAPHY HELPERS
+        ══════════════════════════════ */
+        .tg {
+          background: linear-gradient(130deg, #C9A020 0%, #F2C847 40%, #F9E08A 65%, #C9A020 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .gold-badge {
+          background: linear-gradient(130deg, rgba(242,200,71,0.2) 0%, rgba(249,224,138,0.25) 50%, rgba(201,160,32,0.18) 100%);
+          border: 1px solid rgba(242,200,71,0.4);
+          color: #F2C847;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 0 14px rgba(242,200,71,0.2), inset 0 1px 0 rgba(242,200,71,0.15);
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+        }
+
+        /* ══════════════════════════════
+           SECTION DIVIDERS & ORBS
+        ══════════════════════════════ */
+        .gold-line {
+          height: 1px;
+          background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(242,200,71,0.35) 25%,
+            rgba(249,224,138,0.6) 50%,
+            rgba(242,200,71,0.35) 75%,
+            transparent 100%);
+        }
+
+        .g-orb {
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
+          filter: blur(80px);
         }
 
         /* ── Section heading ornament ── */
-        .orn {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          margin-bottom: 12px;
-        }
-        .orn-line {
-          flex: 1;
-          max-width: 48px;
-          height: 1px;
-        }
+        .orn { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+        .orn-line { flex:1; max-width:48px; height:1px; }
         .orn-line-l { background: linear-gradient(90deg, transparent, rgba(242,200,71,0.55)); }
         .orn-line-r { background: linear-gradient(90deg, rgba(242,200,71,0.55), transparent); }
 
-        /* ── Feature card bottom glow layer ── */
-        .feat-card::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          background: linear-gradient(to top, rgba(242,200,71,0.07) 0%, transparent 55%);
-          pointer-events: none;
-          z-index: 3;
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-        .feat-card:hover::after { opacity: 1; }
-
-        /* ─────────────────────────────────────────
-           PRICING SECTION  —  full rebuild
-        ───────────────────────────────────────── */
-
-        /* Container */
+        /* ══════════════════════════════
+           PRICING CARDS
+        ══════════════════════════════ */
         .pricing-grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -251,40 +366,46 @@ export default function Home() {
           .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
         }
 
-        /* Base card */
         .p-card {
           position: relative;
-          border-radius: 24px;
+          border-radius: 28px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
         }
-        .p-card:hover { transform: translateY(-8px); }
+        .p-card:hover { transform: translateY(-10px); }
 
-        /* ── Standard card ── */
+        /* Standard glass pricing card */
         .p-card-std {
-          background: linear-gradient(160deg, #0C0C18 0%, #08080F 100%);
-          border: 1px solid rgba(242,200,71,0.12);
-          box-shadow: 0 8px 40px rgba(0,0,0,0.55);
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: var(--blur-md);
+          -webkit-backdrop-filter: var(--blur-md);
+          border: 1px solid rgba(255,255,255,0.10);
+          box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
         }
         .p-card-std:hover {
-          border-color: rgba(242,200,71,0.32);
-          box-shadow: 0 20px 64px rgba(0,0,0,0.7), 0 0 40px rgba(242,200,71,0.12);
+          border-color: rgba(242,200,71,0.3);
+          box-shadow: 0 24px 70px rgba(0,0,0,0.65), 0 0 45px rgba(242,200,71,0.12),
+                      inset 0 1px 0 rgba(255,255,255,0.10);
         }
 
-        /* ── Popular card ── */
+        /* Popular gold-tinted glass */
         .p-card-pop {
-          background: linear-gradient(160deg, #10101E 0%, #0C0C18 100%);
-          box-shadow: 0 8px 48px rgba(0,0,0,0.6), 0 0 32px rgba(242,200,71,0.12);
+          background: rgba(242,200,71,0.06);
+          backdrop-filter: var(--blur-lg);
+          -webkit-backdrop-filter: var(--blur-lg);
+          border: 1px solid rgba(242,200,71,0.25);
+          box-shadow: 0 12px 50px rgba(0,0,0,0.55), 0 0 35px rgba(242,200,71,0.12),
+                      inset 0 1px 0 rgba(242,200,71,0.10);
         }
         .p-card-pop::before {
           content: "";
           position: absolute;
           inset: 0;
-          border-radius: 24px;
+          border-radius: 28px;
           padding: 1.5px;
-          background: linear-gradient(160deg, rgba(242,200,71,0.7), rgba(249,224,138,0.35) 50%, rgba(201,160,32,0.6));
+          background: linear-gradient(155deg, rgba(242,200,71,0.65), rgba(249,224,138,0.3) 50%, rgba(201,160,32,0.55));
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -292,19 +413,24 @@ export default function Home() {
           z-index: 10;
         }
         .p-card-pop:hover {
-          box-shadow: 0 24px 80px rgba(0,0,0,0.75), 0 0 60px rgba(242,200,71,0.25);
+          box-shadow: 0 28px 80px rgba(0,0,0,0.7), 0 0 60px rgba(242,200,71,0.22),
+                      inset 0 1px 0 rgba(242,200,71,0.15);
         }
 
-        /* ── Best value card ── */
+        /* Best value — vivid gold glass */
         .p-card-best {
-          background: linear-gradient(155deg, #0F0D08 0%, #0C0A06 50%, #0F0D08 100%);
-          box-shadow: 0 0 80px rgba(242,200,71,0.22), 0 24px 80px rgba(0,0,0,0.7);
+          background: rgba(242,200,71,0.09);
+          backdrop-filter: var(--blur-lg) saturate(200%);
+          -webkit-backdrop-filter: var(--blur-lg) saturate(200%);
+          border: 1px solid rgba(242,200,71,0.35);
+          box-shadow: 0 0 90px rgba(242,200,71,0.25), 0 24px 80px rgba(0,0,0,0.65),
+                      inset 0 1px 0 rgba(242,200,71,0.12);
         }
         .p-card-best::before {
           content: "";
           position: absolute;
           inset: 0;
-          border-radius: 24px;
+          border-radius: 28px;
           padding: 2px;
           background: linear-gradient(135deg, #F2C847 0%, #F9E08A 30%, #C9A020 60%, #F2C847 100%);
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -314,9 +440,10 @@ export default function Home() {
           z-index: 10;
         }
         .p-card-best:hover {
-          box-shadow: 0 0 100px rgba(242,200,71,0.35), 0 32px 100px rgba(0,0,0,0.8);
+          box-shadow: 0 0 110px rgba(242,200,71,0.38), 0 32px 100px rgba(0,0,0,0.75),
+                      inset 0 1px 0 rgba(242,200,71,0.18);
         }
-        /* Animated gold top bar for best card */
+        /* Animated gold scanning line */
         .p-card-best .p-topbar {
           position: absolute;
           top: 0; left: 0; right: 0;
@@ -331,61 +458,51 @@ export default function Home() {
           100% { background-position: 200% 0; }
         }
 
-        /* Card image overlay */
-        .p-img-wrap {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
-        .p-img-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.98) 100%);
-        }
-
-        /* Card content */
+        /* Pricing body / inner */
         .p-body {
           position: relative;
           z-index: 5;
           display: flex;
           flex-direction: column;
           flex: 1;
-          padding: 32px 28px 28px;
+          padding: 36px 30px 30px;
         }
-
-        /* Price display */
         .p-price-num {
           font-size: 3.25rem;
           font-weight: 900;
           line-height: 1;
           letter-spacing: -0.03em;
           color: white;
+          font-family: 'Syne', sans-serif;
         }
-        .p-card-best .p-price-num { background: linear-gradient(135deg, #F2C847, #F9E08A 50%, #C9A020); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-        /* Savings ribbon for best/popular */
+        .p-card-best .p-price-num {
+          background: linear-gradient(135deg, #F2C847, #F9E08A 50%, #C9A020);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
         .p-savings {
           display: inline-flex;
           align-items: center;
           gap: 5px;
-          padding: 4px 10px;
+          padding: 4px 12px;
           border-radius: 100px;
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.06em;
           text-transform: uppercase;
-          background: rgba(242,200,71,0.12);
-          border: 1px solid rgba(242,200,71,0.3);
+          background: rgba(242,200,71,0.1);
+          border: 1px solid rgba(242,200,71,0.28);
           color: #F2C847;
+          backdrop-filter: blur(6px);
           width: fit-content;
+          font-family: 'Syne', sans-serif;
         }
         .p-card-best .p-savings {
           background: rgba(242,200,71,0.18);
           border-color: rgba(242,200,71,0.5);
-          box-shadow: 0 0 12px rgba(242,200,71,0.2);
+          box-shadow: 0 0 14px rgba(242,200,71,0.22);
         }
-
-        /* Feature list row */
         .p-feat {
           display: flex;
           align-items: center;
@@ -396,37 +513,31 @@ export default function Home() {
           padding: 5px 0;
         }
         .p-feat-icon {
-          width: 18px; height: 18px;
+          width: 20px; height: 20px;
           border-radius: 50%;
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
+          background: rgba(242,200,71,0.10);
+          border: 1px solid rgba(242,200,71,0.28);
         }
-        .p-feat-icon-std {
-          background: rgba(242,200,71,0.1);
-          border: 1px solid rgba(242,200,71,0.25);
-        }
-        .p-feat-icon-best {
-          background: rgba(242,200,71,0.2);
-          border: 1px solid rgba(242,200,71,0.45);
+        .p-card-best .p-feat-icon {
+          background: rgba(242,200,71,0.22);
+          border-color: rgba(242,200,71,0.5);
           box-shadow: 0 0 8px rgba(242,200,71,0.25);
         }
-
-        /* Divider in pricing card */
         .p-divider {
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(242,200,71,0.2) 50%, transparent);
-          margin: 20px 0;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12) 50%, transparent);
+          margin: 22px 0;
         }
         .p-card-best .p-divider {
-          background: linear-gradient(90deg, transparent, rgba(242,200,71,0.45) 50%, transparent);
+          background: linear-gradient(90deg, transparent, rgba(242,200,71,0.4) 50%, transparent);
         }
-
-        /* Pricing note at bottom */
         .pricing-note {
           text-align: center;
           margin-top: 36px;
           font-size: 0.8125rem;
-          color: rgba(255,255,255,0.35);
+          color: rgba(255,255,255,0.32);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -440,96 +551,257 @@ export default function Home() {
           font-weight: 600;
           letter-spacing: 0.04em;
           text-transform: uppercase;
+          font-family: 'Syne', sans-serif;
+        }
+
+        /* ══════════════════════════════
+           SLIDER CARDS
+        ══════════════════════════════ */
+        .slider-card-hover {
+          transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1);
+        }
+        .slider-card-hover:hover {
+          border-color: rgba(242,200,71,0.45) !important;
+          box-shadow: 0 0 50px rgba(242,200,71,0.18), 0 24px 60px rgba(0,0,0,0.7) !important;
+          transform: translateY(-6px) scale(1.01);
+        }
+
+        /* ══════════════════════════════
+           HERO GLASS PANEL
+        ══════════════════════════════ */
+        .hero-glass-pill {
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.14);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ══════════════════════════════
+           FLOATING GLASS BADGE
+        ══════════════════════════════ */
+        .glass-stat-pill {
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border: 1px solid rgba(255,255,255,0.12);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        /* ══════════════════════════════
+           BLOG GLASS CARDS
+        ══════════════════════════════ */
+        .blog-card {
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          border: 1px solid rgba(255,255,255,0.09);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .blog-card:hover {
+          border-color: rgba(242,200,71,0.35);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(242,200,71,0.12),
+                      inset 0 1px 0 rgba(242,200,71,0.08);
+          transform: translateY(-6px);
+        }
+
+        /* ══════════════════════════════
+           CTA GLASS PANEL
+        ══════════════════════════════ */
+        .cta-glass {
+          background: rgba(255,255,255,0.04);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255,255,255,0.10);
+          box-shadow: 0 16px 60px rgba(0,0,0,0.5), 0 0 80px rgba(242,200,71,0.10),
+                      inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
+        /* ══════════════════════════════
+           DEVICE ICON BUBBLE
+        ══════════════════════════════ */
+        .device-icon-glass {
+          background: rgba(242,200,71,0.08);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(242,200,71,0.25);
+          box-shadow: 0 0 24px rgba(242,200,71,0.12), inset 0 1px 0 rgba(242,200,71,0.12);
+          transition: all 0.35s ease;
+        }
+        .device-icon-glass:hover {
+          background: rgba(242,200,71,0.15);
+          box-shadow: 0 0 40px rgba(242,200,71,0.25), inset 0 1px 0 rgba(242,200,71,0.18);
+        }
+
+        /* ══════════════════════════════
+           ANIMATED GLASS RING (hero)
+        ══════════════════════════════ */
+        @keyframes ring-pulse {
+          0%, 100% { opacity: 0.35; transform: scale(1); }
+          50%       { opacity: 0.65; transform: scale(1.03); }
+        }
+        .ring-pulse { animation: ring-pulse 4s ease-in-out infinite; }
+
+        /* ══════════════════════════════
+           CHECK STAT ROW (hero bottom)
+        ══════════════════════════════ */
+        .stat-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          align-items: center;
+        }
+        .stat-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 100px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.11);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.6);
+          font-family: 'Syne', sans-serif;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+        }
+
+        /* ══════════════════════════════
+           SECTION BG VARIANTS
+        ══════════════════════════════ */
+        .section-bg-1 {
+          background:
+            radial-gradient(ellipse 100% 70% at 80% -20%, rgba(242,200,71,0.10) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 50% at 10% 60%, rgba(100,50,200,0.09) 0%, transparent 55%),
+            #020210;
+        }
+        .section-bg-2 {
+          background:
+            radial-gradient(ellipse 80% 60% at 20% -10%, rgba(200,120,20,0.09) 0%, transparent 50%),
+            radial-gradient(ellipse 90% 60% at 80% 80%, rgba(242,200,71,0.08) 0%, transparent 55%),
+            #010108;
+        }
+        .section-bg-3 {
+          background:
+            radial-gradient(ellipse 100% 70% at 50% -10%, rgba(242,200,71,0.09) 0%, transparent 55%),
+            radial-gradient(ellipse 60% 50% at 0% 50%, rgba(80,40,180,0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 50% at 100% 70%, rgba(180,100,10,0.08) 0%, transparent 50%),
+            #03030F;
+        }
+
+        /* ══════════════════════════════
+           RESPONSIVE TWEAKS
+        ══════════════════════════════ */
+        @media (max-width: 768px) {
+          .p-body { padding: 28px 22px 22px; }
+          .p-price-num { font-size: 2.5rem; }
         }
       `}</style>
 
       {/* ══════════════════════════════════════════════════
-          1 · HERO
+          1 · HERO — Deep aurora + glass panels
       ══════════════════════════════════════════════════ */}
       <section
-        className="grain relative isolate overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-28 min-h-[90vh] flex items-center"
-        style={{ background: "#05050A" }}
+        className="grain relative isolate overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-28 min-h-[92vh] flex items-center"
+        style={{ background: "#01010C" }}
       >
-        <div className="g-orb" style={{ width: 700, height: 700, top: "-15%", right: "-8%", opacity: 0.8 }} />
-        <div className="g-orb" style={{ width: 450, height: 450, bottom: "-5%", left: "-8%", opacity: 0.5 }} />
+        {/* Aurora background orbs */}
+        <div className="g-orb" style={{ width: 900, height: 700, top: "-20%", right: "-12%",
+          background: "radial-gradient(circle, rgba(242,200,71,0.18) 0%, transparent 70%)", opacity: 0.9 }} />
+        <div className="g-orb" style={{ width: 600, height: 600, top: "10%", left: "-10%",
+          background: "radial-gradient(circle, rgba(120,60,220,0.20) 0%, transparent 70%)", opacity: 0.8 }} />
+        <div className="g-orb" style={{ width: 500, height: 400, bottom: "-10%", left: "30%",
+          background: "radial-gradient(circle, rgba(200,100,20,0.15) 0%, transparent 70%)", opacity: 0.7 }} />
 
         {/* Video BG */}
         <div className="absolute inset-0 -z-20 bg-black">
           <video autoPlay muted loop playsInline preload="metadata"
             poster="https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=2000"
-            className="object-cover w-full h-full opacity-35">
-            <source src="/imgs/bg_movie.mp4" type="video/mp4" />
+            className="object-cover w-full h-full opacity-20">
+            <source src="/imgs/bg_sport.mp4" type="video/mp4" />
           </video>
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#05050A] via-[#05050A]/55 to-[#05050A]/10" />
+        {/* Dark overlay */}
         <div className="absolute inset-0 -z-10"
-          style={{ background: "radial-gradient(ellipse 65% 55% at 72% 18%, rgba(242,200,71,0.09), transparent)" }} />
+          style={{ background: "linear-gradient(to top, #01010C 0%, rgba(1,1,12,0.5) 55%, rgba(1,1,12,0.2) 100%)" }} />
 
-        <div className="gold-line absolute top-0 left-0 right-0" />
+        <div className="gold-line absolute top-0 left-0 right-0" style={{ zIndex: 5 }} />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left" style={{ position: "relative", zIndex: 5 }}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left"
+          style={{ position: "relative", zIndex: 5 }}>
           <div className="max-w-4xl mx-auto md:mx-0">
 
-            {/* Pill badge */}
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
-              style={{
-                background: "linear-gradient(135deg, rgba(242,200,71,0.12), rgba(242,200,71,0.04))",
-                border: "1px solid rgba(242,200,71,0.35)",
-                color: "#F2C847",
-                boxShadow: "0 0 24px rgba(242,200,71,0.18), inset 0 1px 0 rgba(242,200,71,0.15)"
-              }}>
+            {/* Glass pill badge */}
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-bold hero-glass-pill"
+              style={{ color: "#F2C847", fontFamily: "'Syne', sans-serif", letterSpacing: "0.04em" }}>
               <Star className="h-4 w-4 fill-[#F2C847] text-[#F2C847]" />
               The Ultimate IPTV Experience
             </div>
 
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl animate-fade-in"
-              style={{ lineHeight: 1.08 }}>
-              iflexiptv — Every Match. Every Movie.{" "}
+            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
+              style={{ lineHeight: 1.06, fontFamily: "'Syne', sans-serif" }}>
+              Every Match.{" "}<br className="hidden sm:block" />
+              Every Movie.{" "}
               <span className="tg">Zero Buffering.</span>
             </h1>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 sm:text-xl mx-auto md:mx-0 font-medium"
-              style={{ color: "rgba(255,255,255,0.68)" }}>
-              Join thousands of cord-cutters. Get instant access to 26,000+ live premium channels, live sports in 4K, and a massive VOD library.
+            <p className="mt-7 max-w-2xl text-lg leading-8 sm:text-xl mx-auto md:mx-0"
+              style={{ color: "rgba(255,255,255,0.62)", fontWeight: 400 }}>
+              Join thousands of cord-cutters. Get instant access to{" "}
+              <span style={{ color: "#F2C847", fontWeight: 600 }}>26,000+ live premium channels</span>,
+              live sports in 4K, and a massive VOD library.
             </p>
 
-            <div className="mt-11 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+            {/* CTA row */}
+            <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
               <Link href="https://wa.me/1234567890"
-                className="btn-gold relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base tracking-wide">
+                className="btn-gold relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2.5 rounded-full px-9 text-base tracking-wide">
                 <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
                 <span style={{ position: "relative", zIndex: 1 }}>Start Free Trial Now</span>
               </Link>
               <Link href="/channels"
-                className="btn-ghost inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base font-semibold">
+                className="btn-glass inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base">
                 View Channel List
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
-            <div className="mt-11 flex flex-wrap items-center justify-center md:justify-start gap-7 text-sm font-semibold uppercase tracking-wider"
-              style={{ color: "rgba(255,255,255,0.5)" }}>
-              <span className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
+            {/* Glass stat chips */}
+            <div className="mt-10 stat-row justify-center md:justify-start">
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
                 Anti-Freeze Servers
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
+              </div>
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
                 4K &amp; FHD Quality
-              </span>
+              </div>
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
+                26,000+ Channels
+              </div>
             </div>
+
           </div>
         </div>
 
-        <div className="gold-line absolute bottom-0 left-0 right-0" />
+        <div className="gold-line absolute bottom-0 left-0 right-0" style={{ zIndex: 5 }} />
       </section>
 
       {/* ══════════════════════════════════════════════════
           2 · ANIMATED LOGOS
       ══════════════════════════════════════════════════ */}
       <div style={{
-        background: "#080810",
-        borderTop: "1px solid rgba(242,200,71,0.07)",
-        borderBottom: "1px solid rgba(242,200,71,0.07)"
+        background: "rgba(255,255,255,0.02)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        borderTop: "1px solid rgba(255,255,255,0.07)",
+        borderBottom: "1px solid rgba(255,255,255,0.07)"
       }}>
         <AnimatedLogos />
       </div>
@@ -537,9 +809,9 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           3 · LIVE SPORTS SLIDER
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #080810 0%, #050510 100%)" }}>
-        <div className="g-orb" style={{ width: 700, height: 500, top: "-20%", right: "-10%", opacity: 0.65 }} />
+      <section className="grain relative py-20 sm:py-28 overflow-hidden section-bg-1">
+        <div className="g-orb" style={{ width: 700, height: 500, top: "-20%", right: "-10%",
+          background: "radial-gradient(circle, rgba(242,200,71,0.16) 0%, transparent 70%)", opacity: 0.7 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style={{ position: "relative", zIndex: 5 }}>
           <div className="mb-14">
@@ -548,11 +820,16 @@ export default function Home() {
               <Trophy style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
-            <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3">
-              <Trophy className="h-8 w-8" style={{ color: "#F2C847" }} />
+            <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
+              <div className="p-3 rounded-2xl device-icon-glass">
+                <Trophy className="h-6 w-6" style={{ color: "#F2C847" }} />
+              </div>
               Live <span className="tg" style={{ marginLeft: 8 }}>Sports Hub</span>
             </h2>
-            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>Never miss a kickoff, punch, or pole position.</p>
+            <p className="mt-3" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Never miss a kickoff, punch, or pole position.
+            </p>
           </div>
 
           <EmblaSlider delay={3500}>
@@ -561,20 +838,25 @@ export default function Home() {
               { title: "Champions League", img: "/imgs/sports/bg2.jpg" },
               { title: "La Liga", img: "/imgs/sports/bg3.jpg" },
               { title: "Premier League", img: "/imgs/sports/bg4.jpg" },
-              { title: "UFC & Boxing",img: "/imgs/sports/bg5.jpg" },
+              { title: "UFC & Boxing", img: "/imgs/sports/bg5.jpg" },
             ].map((card, i) => (
-              <div key={i} className="card-hover relative aspect-video overflow-hidden rounded-2xl group"
-                style={{ border: "1px solid rgba(242,200,71,0.12)", background: "#0B0B14", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
-                <div className="absolute inset-0 bg-black/30 z-10 transition-colors group-hover:bg-transparent" />
-                <Image src={card.img} alt={card.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 z-20 flex items-end p-6"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}>
-                  <div className="flex items-center gap-3 w-full">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+              <div key={i}
+                className="slider-card-hover relative aspect-video overflow-hidden rounded-2xl group glass-feat-card"
+                style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
+                {/* Glass top layer */}
+                <div className="absolute inset-0 bg-black/25 z-10 transition-colors duration-500 group-hover:bg-transparent" />
+                <Image src={card.img} alt={card.title} fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+                {/* Bottom glass panel */}
+                <div className="absolute left-4 right-4 bottom-4 z-20 rounded-xl p-4 glass-inset"
+                  style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
                       style={{ background: "linear-gradient(135deg,#F2C847,#C9A020)", boxShadow: "0 0 18px rgba(242,200,71,0.6)" }}>
                       <Play className="h-4 w-4 text-black fill-current" />
                     </div>
-                    <h3 className="text-xl font-bold text-white uppercase tracking-wider">{card.title}</h3>
+                    <h3 className="text-base font-bold text-white uppercase tracking-wider"
+                      style={{ fontFamily: "'Syne', sans-serif" }}>{card.title}</h3>
                   </div>
                 </div>
               </div>
@@ -586,9 +868,10 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════
           4 · MOVIES & SERIES SLIDER
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)", borderBottom: "1px solid rgba(242,200,71,0.07)" }}>
-        <div className="g-orb" style={{ width: 500, height: 500, bottom: "-20%", left: "-5%", opacity: 0.45 }} />
+      <section className="grain relative py-20 overflow-hidden section-bg-2"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="g-orb" style={{ width: 500, height: 500, bottom: "-20%", left: "-5%",
+          background: "radial-gradient(circle, rgba(242,200,71,0.14) 0%, transparent 70%)", opacity: 0.55 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style={{ position: "relative", zIndex: 5 }}>
           <div className="mb-14">
@@ -597,11 +880,16 @@ export default function Home() {
               <Film style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
-            <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3">
-              <Film className="h-8 w-8" style={{ color: "#F2C847" }} />
+            <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
+              <div className="p-3 rounded-2xl device-icon-glass">
+                <Film className="h-6 w-6" style={{ color: "#F2C847" }} />
+              </div>
               Premium <span className="tg" style={{ marginLeft: 8 }}>Cinema</span>
             </h2>
-            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>100,000+ VODs updated daily. Your home theater awaits.</p>
+            <p className="mt-3" style={{ color: "rgba(255,255,255,0.45)" }}>
+              100,000+ VODs updated daily. Your home theater awaits.
+            </p>
           </div>
 
           <EmblaSlider delay={4000}>
@@ -612,15 +900,26 @@ export default function Home() {
               { title: "Sci-Fi Fantasy", img: "/imgs/movies/movie_4.webp", badge: "4K UHD" },
               { title: "Family & Kids", img: "/imgs/movies/movie_5.webp", badge: "HD" },
             ].map((card, i) => (
-              <div key={i} className="card-hover relative aspect-[3/4] overflow-hidden rounded-2xl group"
-                style={{ border: "1px solid rgba(242,200,71,0.1)", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
-                <Image src={card.img} alt={card.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35) 50%, transparent)" }} />
+              <div key={i}
+                className="slider-card-hover relative aspect-[3/4] overflow-hidden rounded-2xl group glass-feat-card"
+                style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
+                <Image src={card.img} alt={card.title} fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(1,1,12,0.92), rgba(1,1,12,0.35) 50%, transparent)" }} />
+                {/* Glass badge */}
                 <div className="absolute top-4 right-4" style={{ zIndex: 10 }}>
-                  <span className="gold-badge text-xs font-black px-3 py-1 rounded-full tracking-wider">{card.badge}</span>
+                  <span className="gold-badge text-xs font-black px-3 py-1.5 rounded-full tracking-wider">
+                    {card.badge}
+                  </span>
                 </div>
-                <div className="absolute inset-0 flex flex-col justify-end p-6" style={{ zIndex: 10 }}>
-                  <h3 className="text-xl font-bold text-white">{card.title}</h3>
+                {/* Bottom glass content */}
+                <div className="absolute left-4 right-4 bottom-4 z-10 rounded-xl p-4"
+                  style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)",
+                    border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <h3 className="text-base font-bold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
+                    {card.title}
+                  </h3>
                 </div>
               </div>
             ))}
@@ -629,52 +928,67 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          5 · FEATURE CARDS
+          5 · FEATURE CARDS — Full glass overlay
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "linear-gradient(170deg,#080810 0%,#05050D 60%,#080810 100%)" }}>
-        <div className="g-orb" style={{ width: 900, height: 450, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.45 }} />
+      <section className="grain relative py-20 sm:py-28 overflow-hidden section-bg-3">
+        <div className="g-orb" style={{ width: 800, height: 400, top: 0, left: "50%", transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(242,200,71,0.12) 0%, transparent 70%)", opacity: 0.5 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
+          {/* Section header */}
           <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "4rem" }}>
             <div className="orn" style={{ justifyContent: "center" }}>
               <div className="orn-line orn-line-l" />
               <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
-            <h2 className="text-3xl font-bold sm:text-4xl text-white">
+            <h2 className="text-3xl font-bold sm:text-4xl text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
               Why Thousands <span className="tg">Choose Us</span>
             </h2>
-            <p className="mt-4 font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>Premium entertainment. Zero compromise.</p>
+            <p className="mt-4" style={{ color: "rgba(255,255,255,0.48)" }}>Premium entertainment. Zero compromise.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {featureCards.map((card) => (
               <div key={card.title}
-                className="feat-card card-hover group relative overflow-hidden rounded-[2rem] aspect-[3/4]"
-                style={{ border: "1px solid rgba(242,200,71,0.15)", boxShadow: "0 0 50px rgba(242,200,71,0.12), 0 20px 60px rgba(0,0,0,0.65)" }}>
+                className="glass-feat-card group relative overflow-hidden rounded-[2rem] aspect-[3/4]"
+                style={{ boxShadow: "0 0 50px rgba(242,200,71,0.10), 0 20px 60px rgba(0,0,0,0.65)" }}>
 
                 {/* BG image */}
                 <div className="absolute inset-0" style={{ zIndex: 0 }}>
-                  <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-108" />
+                  <Image src={card.image} alt={card.title} fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110" />
                 </div>
-                {/* Gradient overlay */}
-                <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(to top, #05050A 0%, rgba(5,5,10,0.75) 45%, rgba(5,5,10,0.2) 100%)" }} />
-                {/* Top shimmer line */}
-                <div className="absolute top-0 left-0 right-0 h-px" style={{ zIndex: 4, background: "linear-gradient(90deg, transparent, rgba(242,200,71,0.55) 50%, transparent)" }} />
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ zIndex: 5 }}>
-                  <span className="gold-badge mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest w-fit">
-                    {card.badge}
-                  </span>
-                  <h3 className="text-2xl font-extrabold text-white mb-3 leading-tight">{card.title}</h3>
-                  <p className="text-sm leading-relaxed font-medium mb-7" style={{ color: "rgba(255,255,255,0.62)" }}>{card.description}</p>
-                  <Link href="https://wa.me/1234567890"
-                    className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm tracking-wide">
-                    <MessageCircle className="h-4 w-4" style={{ position: "relative", zIndex: 1 }} />
-                    <span style={{ position: "relative", zIndex: 1 }}>{card.cta}</span>
-                  </Link>
+                {/* Multi-layer glass overlay */}
+                <div className="absolute inset-0" style={{ zIndex: 1,
+                  background: "linear-gradient(to top, rgba(1,1,12,0.96) 0%, rgba(1,1,12,0.7) 40%, rgba(1,1,12,0.15) 100%)" }} />
+
+                {/* Top shimmer */}
+                <div className="absolute top-0 left-0 right-0 h-px" style={{ zIndex: 4,
+                  background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.25) 50%, transparent)" }} />
+
+                {/* Content glass panel */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6" style={{ zIndex: 5 }}>
+                  {/* Glass inner card */}
+                  <div className="rounded-2xl p-6"
+                    style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(16px)",
+                      WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.10)",
+                      boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07)" }}>
+                    <span className="gold-badge mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest">
+                      {card.badge}
+                    </span>
+                    <h3 className="text-xl font-extrabold text-white mb-3 leading-tight"
+                      style={{ fontFamily: "'Syne', sans-serif" }}>{card.title}</h3>
+                    <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.58)" }}>
+                      {card.description}
+                    </p>
+                    <Link href="https://wa.me/1234567890"
+                      className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm tracking-wide">
+                      <MessageCircle className="h-4 w-4" style={{ position: "relative", zIndex: 1 }} />
+                      <span style={{ position: "relative", zIndex: 1 }}>{card.cta}</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -683,44 +997,57 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          6 · DEVICES
+          6 · DEVICES — Glass icon cards
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)", borderBottom: "1px solid rgba(242,200,71,0.07)" }}>
-        <div className="g-orb" style={{ width: 600, height: 600, bottom: "-20%", right: "-5%", opacity: 0.5 }} />
+      <section className="grain relative py-20 sm:py-28 overflow-hidden section-bg-2"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="g-orb" style={{ width: 600, height: 600, bottom: "-20%", right: "-5%",
+          background: "radial-gradient(circle, rgba(242,200,71,0.14) 0%, transparent 70%)", opacity: 0.55 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
+          {/* Section header */}
           <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "4rem" }}>
             <div className="orn" style={{ justifyContent: "center" }}>
               <div className="orn-line orn-line-l" />
               <Tv style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
-            <h2 className="text-3xl font-bold sm:text-4xl text-white mb-4">
+            <h2 className="text-3xl font-bold sm:text-4xl text-white mb-4"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
               Watch on <span className="tg">Any Screen</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.5)" }}>Setup takes less than 5 minutes on any of these devices.</p>
+            <p style={{ color: "rgba(255,255,255,0.45)" }}>
+              Setup takes less than 5 minutes on any of these devices.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {devices.map((device, i) => (
-              <div key={i} className="card-hover group relative overflow-hidden rounded-2xl aspect-[4/3]"
-                style={{ border: "1px solid rgba(242,200,71,0.12)", background: "#0B0B16", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
+              <div key={i}
+                className="glass-card group relative overflow-hidden rounded-2xl aspect-[4/3]"
+                style={{ borderRadius: "20px" }}>
+                {/* Background image with glass overlay */}
                 <Image src={device.image} alt={device.name} fill
-                  className="object-cover opacity-25 transition-all duration-700 group-hover:scale-105 group-hover:opacity-18" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 60%, transparent)" }} />
-                {/* hover top accent */}
-                <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                  className="object-cover opacity-15 transition-all duration-700 group-hover:scale-105 group-hover:opacity-10" />
+                <div className="absolute inset-0"
+                  style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%)" }} />
+
+                {/* Hover top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: "linear-gradient(90deg, transparent, #F2C847 50%, transparent)" }} />
 
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 gap-4" style={{ zIndex: 5 }}>
-                  <div className="p-5 rounded-full transition-all duration-300"
-                    style={{ background: "rgba(242,200,71,0.08)", border: "1px solid rgba(242,200,71,0.22)", boxShadow: "0 0 22px rgba(242,200,71,0.1)" }}>
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 gap-4"
+                  style={{ zIndex: 5 }}>
+                  {/* Glass icon bubble */}
+                  <div className="p-5 rounded-full device-icon-glass">
                     {device.icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">{device.name}</h3>
-                    <span className="text-xs font-black uppercase tracking-wider mt-2 block" style={{ color: "#F2C847" }}>
+                    <h3 className="text-xl font-bold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
+                      {device.name}
+                    </h3>
+                    <span className="text-xs font-black uppercase tracking-wider mt-2 block"
+                      style={{ color: "#F2C847", fontFamily: "'Syne', sans-serif" }}>
                       Setup: {device.difficulty}
                     </span>
                   </div>
@@ -730,7 +1057,9 @@ export default function Home() {
           </div>
 
           <div className="mt-12 text-center">
-            <Link href="/guides" className="inline-flex items-center gap-2 font-bold transition-all hover:gap-3" style={{ color: "#F2C847" }}>
+            <Link href="/guides"
+              className="inline-flex items-center gap-2 font-bold transition-all hover:gap-3"
+              style={{ color: "#F2C847", fontFamily: "'Syne', sans-serif" }}>
               View Installation Guides <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -738,45 +1067,47 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          7 · PRICING  (full luxury rebuild)
+          7 · PRICING — Tiered glass cards
       ══════════════════════════════════════════════════ */}
-     <section className="grain relative py-24 sm:py-32 overflow-hidden"
-       id="pricing"
-       style={{ background: "linear-gradient(180deg, #080810 0%, #060610 50%, #080810 100%)" }}>
+      <section className="grain relative py-24 sm:py-32 overflow-hidden section-bg-1"
+        id="pricing">
+        {/* Atmospheric orbs */}
+        <div className="g-orb" style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(242,200,71,0.12) 0%, transparent 70%)", opacity: 0.4 }} />
+        <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%",
+          background: "radial-gradient(circle, rgba(120,60,220,0.14) 0%, transparent 70%)", opacity: 0.3 }} />
+        <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%",
+          background: "radial-gradient(circle, rgba(200,100,20,0.14) 0%, transparent 70%)", opacity: 0.3 }} />
 
-       {/* Atmospheric gold glow */}
-       <div className="g-orb" style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)", opacity: 0.35 }} />
-       <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", opacity: 0.2 }} />
-       <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%", opacity: 0.2 }} />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
+            <div className="orn" style={{ justifyContent: "center" }}>
+              <div className="orn-line orn-line-l" />
+              <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
+              <div className="orn-line orn-line-r" />
+            </div>
+            <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3"
+              style={{ fontFamily: "'Syne', sans-serif" }}>
+              Choose Your <span className="tg">Access Pass</span>
+            </h2>
+            <p className="text-lg" style={{ color: "rgba(255,255,255,0.50)" }}>
+              Instant activation · Premium content · WhatsApp delivery
+            </p>
+          </div>
 
-       <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
-
-         {/* Section header */}
-         <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
-           <div className="orn" style={{ justifyContent: "center" }}>
-             <div className="orn-line orn-line-l" />
-             <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
-             <div className="orn-line orn-line-r" />
-           </div>
-           <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3">
-             Choose Your <span className="tg">Access Pass</span>
-           </h2>
-           <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.52)" }}>
-             Instant activation · Premium content · WhatsApp delivery
-           </p>
-         </div>
-
-         {/* Dynamic Pricing Component */}
-         <PricingSection />
-       </div>
-     </section>
+          {/* Dynamic Pricing Component */}
+          <PricingSection />
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════
-          8 · BLOG PREVIEW
+          8 · BLOG PREVIEW — Glass article cards
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)" }}>
-        <div className="g-orb" style={{ width: 600, height: 400, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.3 }} />
+      <section className="grain relative py-20 sm:py-28 overflow-hidden section-bg-2"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div className="g-orb" style={{ width: 600, height: 400, top: 0, left: "50%", transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(242,200,71,0.10) 0%, transparent 70%)", opacity: 0.4 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6" style={{ marginBottom: "3.5rem" }}>
@@ -786,11 +1117,13 @@ export default function Home() {
                 <Calendar style={{ width: 14, height: 14, color: "#F2C847" }} />
                 <div className="orn-line orn-line-r" />
               </div>
-              <h2 className="text-3xl font-bold sm:text-4xl text-white">
+              <h2 className="text-3xl font-bold sm:text-4xl text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
                 Latest IPTV <span className="tg">Guides</span>
               </h2>
             </div>
-            <Link href="/blog" className="font-bold inline-flex items-center gap-2 whitespace-nowrap transition-all hover:gap-3" style={{ color: "#F2C847" }}>
+            <Link href="/blog"
+              className="font-bold inline-flex items-center gap-2 whitespace-nowrap transition-all hover:gap-3"
+              style={{ color: "#F2C847", fontFamily: "'Syne', sans-serif" }}>
               Read all articles <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -798,24 +1131,30 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {latestPosts.map((post) => (
               <Link key={post.slug} href={`/blog/${post.slug}`}
-                className="card-hover group flex flex-col overflow-hidden rounded-2xl"
-                style={{ border: "1px solid rgba(242,200,71,0.1)", background: "#0B0B16", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}>
+                className="blog-card group flex flex-col overflow-hidden rounded-2xl">
+                {/* Image */}
                 <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image src={post.image} alt={post.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-transparent transition-colors" />
+                  <Image src={post.image} alt={post.title} fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0"
+                    style={{ background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.3))" }} />
+                  {/* Glass category badge */}
                   <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-black backdrop-blur"
-                      style={{ background: "rgba(242,200,71,0.15)", border: "1px solid rgba(242,200,71,0.35)", color: "#F2C847" }}>
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-black gold-badge"
+                      style={{ fontFamily: "'Syne', sans-serif" }}>
                       {post.category}
                     </span>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col" style={{ background: "rgba(0,0,0,0.35)" }}>
-                  <h3 className="text-base font-bold mb-3 text-white line-clamp-2 leading-snug transition-colors group-hover:text-[#F2C847]">
+                {/* Glass content panel */}
+                <div className="p-5 flex-1 flex flex-col"
+                  style={{ background: "rgba(255,255,255,0.03)" }}>
+                  <h3 className="text-sm font-bold mb-3 text-white line-clamp-2 leading-snug transition-colors group-hover:text-[#F2C847]"
+                    style={{ fontFamily: "'Syne', sans-serif" }}>
                     {post.title}
                   </h3>
                   <div className="mt-auto flex items-center justify-between text-xs pt-4"
-                    style={{ color: "rgba(255,255,255,0.4)", borderTop: "1px solid rgba(242,200,71,0.08)" }}>
+                    style={{ color: "rgba(255,255,255,0.38)", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
                     <span className="flex items-center gap-1.5 font-semibold">
                       <Calendar className="h-3.5 w-3.5" />
                       {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
@@ -833,48 +1172,71 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          9 · FINAL CTA
+          9 · FINAL CTA — Dramatic glass panel
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative isolate overflow-hidden py-32"
-        style={{ background: "#080810", borderTop: "1px solid rgba(242,200,71,0.1)" }}>
+      <section className="grain relative isolate overflow-hidden py-32 section-bg-1"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        {/* BG image */}
         <div className="absolute inset-0" style={{ zIndex: -2 }}>
-          <Image src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
-            alt="Cinematic TV Glow" fill className="object-cover opacity-12" />
+          <Image
+            src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
+            alt="Cinematic TV Glow" fill className="object-cover opacity-10" />
         </div>
-        <div className="absolute inset-0" style={{ zIndex: -1, background: "linear-gradient(to top, #080810 0%, rgba(8,8,16,0.72) 60%, transparent 100%)" }} />
-        <div className="absolute inset-0" style={{ zIndex: -1, background: "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(242,200,71,0.1), transparent)" }} />
+        <div className="absolute inset-0" style={{ zIndex: -1,
+          background: "linear-gradient(to top, #02020E 0%, rgba(2,2,14,0.7) 60%, transparent 100%)" }} />
 
-        <div className="g-orb" style={{ width: 800, height: 500, bottom: "-10%", left: "50%", transform: "translateX(-50%)", opacity: 0.65 }} />
+        {/* Large aurora orbs */}
+        <div className="g-orb" style={{ width: 800, height: 500, bottom: "-10%", left: "50%", transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(242,200,71,0.16) 0%, transparent 70%)", opacity: 0.7 }} />
+        <div className="g-orb" style={{ width: 500, height: 400, top: "10%", left: "10%",
+          background: "radial-gradient(circle, rgba(120,60,220,0.14) 0%, transparent 70%)", opacity: 0.5 }} />
 
-        <div className="gold-line absolute top-0 left-0 right-0" />
+        <div className="gold-line absolute top-0 left-0 right-0" style={{ zIndex: 5 }} />
 
         <div className="container mx-auto px-4 text-center" style={{ position: "relative", zIndex: 5 }}>
-          <div className="orn" style={{ justifyContent: "center", marginBottom: "1.5rem" }}>
-            <div className="orn-line orn-line-l" />
-            <Star style={{ width: 18, height: 18, color: "#F2C847" }} />
-            <div className="orn-line orn-line-r" />
-          </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
-            Start Watching <span className="tg">Tonight.</span>
-          </h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.52)" }}>
-            Get your login credentials delivered instantly via WhatsApp. Join the future of television.
-          </p>
-          <Link href="https://wa.me/1234567890"
-            className="btn-gold inline-flex h-16 items-center justify-center gap-3 rounded-full px-14 text-lg">
-            <MessageCircle className="h-6 w-6" style={{ position: "relative", zIndex: 1 }} />
-            <span style={{ position: "relative", zIndex: 1 }}>Get Your Pass Now</span>
-          </Link>
+          {/* Centered glass content panel */}
+          <div className="max-w-3xl mx-auto cta-glass rounded-3xl p-12 sm:p-16"
+            style={{ borderRadius: "32px" }}>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm font-semibold uppercase tracking-wider"
-            style={{ color: "rgba(255,255,255,0.4)" }}>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> Instant Activation</span>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> 24/7 Support</span>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> No Contract</span>
+            <div className="orn" style={{ justifyContent: "center", marginBottom: "1.5rem" }}>
+              <div className="orn-line orn-line-l" />
+              <Star style={{ width: 18, height: 18, color: "#F2C847" }} />
+              <div className="orn-line orn-line-r" />
+            </div>
+
+            <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6"
+              style={{ fontFamily: "'Syne', sans-serif", lineHeight: 1.08 }}>
+              Start Watching <span className="tg">Tonight.</span>
+            </h2>
+            <p className="text-lg mb-10 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.52)" }}>
+              Get your login credentials delivered instantly via WhatsApp. Join the future of television.
+            </p>
+
+            <Link href="https://wa.me/1234567890"
+              className="btn-gold inline-flex h-16 items-center justify-center gap-3 rounded-full px-14 text-lg">
+              <MessageCircle className="h-6 w-6" style={{ position: "relative", zIndex: 1 }} />
+              <span style={{ position: "relative", zIndex: 1 }}>Get Your Pass Now</span>
+            </Link>
+
+            {/* Glass stat chips row */}
+            <div className="mt-10 stat-row justify-center">
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
+                Instant Activation
+              </div>
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
+                24/7 Support
+              </div>
+              <div className="stat-chip">
+                <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} />
+                No Contract
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="gold-line absolute bottom-0 left-0 right-0" />
+        <div className="gold-line absolute bottom-0 left-0 right-0" style={{ zIndex: 5 }} />
       </section>
     </>
   );
