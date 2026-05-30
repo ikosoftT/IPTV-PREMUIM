@@ -27,29 +27,38 @@ export default function Navbar() {
     <>
       <style>{`
         .nav-root {
-          position: sticky;
-          top: 0;
+          position: fixed;
+          top: 16px;
+          left: 50%;
+          transform: translateX(-50%);
           z-index: 50;
-          width: 100%;
-          transition: all 0.4s ease;
+          width: calc(100% - 24px);
+          max-w: 1200px;
+          border-radius: 20px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: rgba(5, 5, 10, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
         .nav-root.scrolled {
-          background: rgba(5,5,10,0.92);
+          top: 12px;
+          background: rgba(5, 5, 10, 0.82);
+          border-color: rgba(235, 182, 22, 0.3);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(235, 182, 22, 0.15);
+          transform: translateX(-50%) scale(0.99);
           backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(235,182,22,0.2);
-          box-shadow: 0 4px 40px rgba(0,0,0,0.6);
-        }
-        .nav-root.top {
-          background: rgba(5,5,10,0.6);
-          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(24px);
         }
 
         /* Scrollable mobile nav */
         .nav-scroll {
           display: flex;
-          gap: 10px;
+          gap: 8px;
           overflow-x: auto;
           scrollbar-width: none;
+          padding: 2px 4px;
         }
         .nav-scroll::-webkit-scrollbar {
           display: none;
@@ -57,30 +66,48 @@ export default function Navbar() {
 
         .nav-pill {
           flex: none;
-          padding: 8px 14px;
+          padding: 6px 12px;
           border-radius: 999px;
           font-size: 13px;
           font-weight: 600;
-          color: rgba(255,255,255,0.7);
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.08);
+          color: rgba(255, 255, 255, 0.7);
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.06);
           transition: all 0.25s ease;
         }
         .nav-pill:hover {
           color: #EBB616;
-          border-color: rgba(235,182,22,0.4);
-          background: rgba(235,182,22,0.08);
+          border-color: rgba(235, 182, 22, 0.4);
+          background: rgba(235, 182, 22, 0.08);
         }
 
         /* Desktop link */
         .nav-link {
           font-size: 14px;
           font-weight: 600;
-          color: rgba(255,255,255,0.7);
-          transition: color 0.2s;
+          color: rgba(255, 255, 255, 0.7);
+          transition: all 0.2s ease;
+          position: relative;
+          padding: 4px 0;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          transform: scaleX(0);
+          height: 2px;
+          bottom: 0;
+          left: 0;
+          background: linear-gradient(90deg, #EBB616, #F9D976);
+          transform-origin: bottom right;
+          transition: transform 0.25s ease-out;
         }
         .nav-link:hover {
           color: #EBB616;
+        }
+        .nav-link:hover::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
         }
 
         /* CTA */
@@ -88,19 +115,19 @@ export default function Navbar() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          height: 40px;
-          padding: 0 18px;
+          height: 38px;
+          padding: 0 16px;
           border-radius: 999px;
           font-weight: 800;
           font-size: 13px;
           color: black;
           background: linear-gradient(135deg, #EBB616, #F9D976, #C99800);
-          box-shadow: 0 4px 20px rgba(235,182,22,0.5);
-          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(235, 182, 22, 0.4);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .nav-cta:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(235,182,22,0.7);
+          box-shadow: 0 8px 30px rgba(235, 182, 22, 0.6);
         }
       `}</style>
 

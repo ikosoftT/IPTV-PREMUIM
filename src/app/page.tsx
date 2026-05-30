@@ -21,6 +21,7 @@ import SchemaMarkup from "@/components/SchemaMarkup";
 import EmblaSlider from "@/components/EmblaSlider";
 import AnimatedLogos from "@/components/AnimatedLogos";
 import { blogPosts } from "@/lib/blog-data";
+import PricingSection from "@/components/PricingSection";
 
 export default function Home() {
   const schema = {
@@ -89,60 +90,7 @@ export default function Home() {
     },
   ];
 
-const pricingPlans = [
-  {
-    months: "3 Months",
-    price: "€37",
-    perMonth: "€12.33 /mo",
-    tagType: "none",
-    tag: null,
-    image: "/imgs/movies/movie_1.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support"
-    ],
-    cta: "Order Now"
-  },
-  {
-    months: "6 Months",
-    price: "€49",
-    perMonth: "€8.16 /mo",
-    tagType: "popular",
-    tag: "Most Popular",
-    image: "/imgs/movies/movie_2.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support"
-    ],
-    cta: "Order Now"
-  },
-  {
-    months: "12 Months",
-    price: "€67",
-    perMonth: "€5.58 /mo",
-    tagType: "best",
-    tag: "Best Value",
-    image: "/imgs/movies/movie_3.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support",
-      "Free Setup Assistance"
-    ],
-    cta: "Order Now"
-  }
-];
+
 
   const latestPosts = blogPosts.slice(0, 4);
 
@@ -534,9 +482,9 @@ const pricingPlans = [
               The Ultimate IPTV Experience
             </div>
 
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
+            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl animate-fade-in"
               style={{ lineHeight: 1.08 }}>
-              Every Match. Every Movie.{" "}
+              iflexiptv — Every Match. Every Movie.{" "}
               <span className="tg">Zero Buffering.</span>
             </h1>
 
@@ -793,140 +741,35 @@ const pricingPlans = [
           7 · PRICING  (full luxury rebuild)
       ══════════════════════════════════════════════════ */}
      <section className="grain relative py-24 sm:py-32 overflow-hidden"
-  style={{ background: "linear-gradient(180deg, #080810 0%, #060610 50%, #080810 100%)" }}>
+       id="pricing"
+       style={{ background: "linear-gradient(180deg, #080810 0%, #060610 50%, #080810 100%)" }}>
 
-  {/* Atmospheric gold glow */}
-  <div className="g-orb" style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)", opacity: 0.35 }} />
-  <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", opacity: 0.2 }} />
-  <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%", opacity: 0.2 }} />
+       {/* Atmospheric gold glow */}
+       <div className="g-orb" style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)", opacity: 0.35 }} />
+       <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", opacity: 0.2 }} />
+       <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%", opacity: 0.2 }} />
 
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
+       <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
 
-    {/* Section header */}
-    <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
-      <div className="orn" style={{ justifyContent: "center" }}>
-        <div className="orn-line orn-line-l" />
-        <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
-        <div className="orn-line orn-line-r" />
-      </div>
-      <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3">
-        Choose Your <span className="tg">Access Pass</span>
-      </h2>
-      <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.52)" }}>
-        Instant activation · Premium content · WhatsApp delivery
-      </p>
-    </div>
+         {/* Section header */}
+         <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
+           <div className="orn" style={{ justifyContent: "center" }}>
+             <div className="orn-line orn-line-l" />
+             <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
+             <div className="orn-line orn-line-r" />
+           </div>
+           <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3">
+             Choose Your <span className="tg">Access Pass</span>
+           </h2>
+           <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.52)" }}>
+             Instant activation · Premium content · WhatsApp delivery
+           </p>
+         </div>
 
-    {/* Cards grid */}
-    <div className="pricing-grid">
-      {pricingPlans.map((plan) => (
-        <article
-          key={plan.months}
-          className={`p-card ${
-            plan.tagType === "best"
-              ? "p-card-best"
-              : plan.tagType === "popular"
-              ? "p-card-pop"
-              : "p-card-std"
-          }`}
-        >
-          {/* Animated top bar (best only) */}
-          {plan.tagType === "best" && <div className="p-topbar" />}
-
-          {/* Background image */}
-          <div className="p-img-wrap">
-            <Image src={plan.image} alt={plan.months} fill className="object-cover opacity-25" />
-            <div className="p-img-overlay" />
-          </div>
-
-          {/* Tag badge */}
-          {plan.tag && (
-            <div style={{ position: "absolute", top: plan.tagType === "best" ? "22px" : "20px", right: "20px", zIndex: 12 }}>
-              {plan.tagType === "best" ? (
-                <span className="gold-badge rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest block">
-                  ★ {plan.tag}
-                </span>
-              ) : (
-                <span className="p-savings">
-                  <Zap style={{ width: 9, height: 9 }} />
-                  {plan.tag}
-                </span>
-              )}
-            </div>
-          )}
-
-          {/* Card body */}
-          <div className="p-body">
-
-            {/* Plan name */}
-            <div style={{ marginBottom: "20px" }}>
-              <p className="text-xs font-black uppercase tracking-[0.18em]"
-                style={{ color: plan.tagType === "best" ? "#F2C847" : "rgba(255,255,255,0.45)", marginBottom: 6 }}>
-                {plan.tagType === "best" ? "— Premium —" : plan.tagType === "popular" ? "— Popular —" : "— Starter —"}
-              </p>
-              <h3 className="text-2xl font-black tracking-tight"
-                style={{ color: plan.tagType === "best" ? "#F2C847" : "white" }}>
-                {plan.months}
-              </h3>
-            </div>
-
-            {/* Price block */}
-            <div style={{ marginBottom: "4px" }}>
-              <div className="p-price-num">{plan.price}</div>
-              <p className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
-                {plan.perMonth}
-              </p>
-            </div>
-
-            {/* Savings pill */}
-            {plan.tagType !== "none" && (
-              <div style={{ marginTop: 12 }}>
-                <div className="p-savings">
-                  <Shield style={{ width: 9, height: 9 }} />
-                  {plan.tagType === "best" ? "Save 32% vs monthly" : "Save 18% vs monthly"}
-                </div>
-              </div>
-            )}
-
-            <div className="p-divider" />
-
-            {/* Features */}
-            <ul style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28, flex: 1 }}>
-              {plan.features.map((feat) => (
-                <li key={feat} className="p-feat">
-                  <div className={`p-feat-icon ${plan.tagType === "best" ? "p-feat-icon-best" : "p-feat-icon-std"}`}>
-                    <CheckCircle style={{ width: 11, height: 11, color: "#F2C847" }} />
-                  </div>
-                  {feat}
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <Link
-              href="https://wa.me/1234567890"
-              className={`inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-base tracking-wide ${
-                plan.tagType === "none" ? "btn-ghost" : "btn-gold"
-              }`}
-              style={{ fontWeight: 800 }}
-            >
-              <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
-              <span style={{ position: "relative", zIndex: 1 }}>{plan.cta}</span>
-            </Link>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    {/* Trust row */}
-    <div className="pricing-note">
-      <span><Zap style={{ width: 13, height: 13, color: "#F2C847" }} /> Instant Activation</span>
-      <span><Shield style={{ width: 13, height: 13, color: "#F2C847" }} /> No Contract</span>
-      <span><Infinity style={{ width: 13, height: 13, color: "#F2C847" }} /> 24/7 Support</span>
-      <span><MessageCircle style={{ width: 13, height: 13, color: "#F2C847" }} /> WhatsApp Delivery</span>
-    </div>
-  </div>
-</section>
+         {/* Dynamic Pricing Component */}
+         <PricingSection />
+       </div>
+     </section>
 
       {/* ══════════════════════════════════════════════════
           8 · BLOG PREVIEW
