@@ -1,11 +1,17 @@
 const encode = encodeURIComponent;
 
 export function createWhatsAppOrderUrl(planName: string, price: string) {
-  const message = `Hi iflexiptv, I want to order the ${planName} plan (${price}). Please send me the activation details.`;
+  const messages: { [key: string]: string } = {
+    "3 Months": `Hi, I'd like the 3 Months plan at €37. Please send details.`, 
+    "6 Months": `Hi, I'd like the 6 Months plan at €49. Please send details.`, 
+    "12 Months": `Hi, I'd like the 12 Months VIP plan at €67. Please send details.`, 
+  };
 
-  return `https://wa.me/?text=${encode(message)}`;
+  const customMessage = messages[planName] || `Hi, I'd like the ${planName} plan at ${price}. Please send details.`;
+
+  return `https://wa.me/447828714977?text=${encode(customMessage)}`;
 }
 
-export const whatsappSetupGuidanceUrl = `https://wa.me/?text=${encode(
-  "Hi iflexiptv, I need setup guidance for my device."
+export const whatsappSetupGuidanceUrl = `https://wa.me/447828714977?text=${encode(
+  "Hi, I'm interested in I Flex IPTV. Please help me setup my device."
 )}`;

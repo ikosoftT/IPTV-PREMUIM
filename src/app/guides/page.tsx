@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, MonitorPlay, Smartphone, Tv, CheckCircle, Clock, Zap } from "lucide-react";
+import { MessageCircle, MonitorPlay, Smartphone, Tv, Clock, Zap, Sparkles } from "lucide-react";
 import SchemaMarkup from "@/components/SchemaMarkup";
 
 export const metadata = {
-  title: "IPTV Setup Guides | How to Install on Any Device",
+  title: "IPTV Setup Guides | How to Install on Any Device - I Flex IPTV",
   description: "Learn how to easily set up your IPTV subscription on Firestick, Smart TVs (Samsung, LG, Android), Apple TV, and mobile devices in minutes.",
   alternates: {
     canonical: "https://www.iflexiptv.com/guides",
@@ -15,7 +15,7 @@ const guides = [
   {
     id: "firestick",
     title: "Amazon Firestick Setup",
-    icon: <MonitorPlay className="h-6 w-6 text-brand" />,
+    icon: <MonitorPlay className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/5428830/pexels-photo-5428830.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "5 mins",
@@ -29,7 +29,7 @@ const guides = [
   {
     id: "smart-tv",
     title: "Samsung & LG Smart TVs",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "3 mins",
@@ -43,7 +43,7 @@ const guides = [
   {
     id: "android-tv",
     title: "Android TV & TiviMate",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/5721865/pexels-photo-5721865.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Medium",
     time: "5 mins",
@@ -57,7 +57,7 @@ const guides = [
   {
     id: "iptv-smarters",
     title: "IPTV Smarters Pro Setup",
-    icon: <Smartphone className="h-6 w-6 text-brand" />,
+    icon: <Smartphone className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/5082567/pexels-photo-5082567.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "2 mins",
@@ -65,13 +65,13 @@ const guides = [
       "Download IPTV Smarters Pro on your device.",
       "Open the application and select 'Login with Xtream Codes API'.",
       "Enter a profile name (e.g., iflexiptv).",
-      "Enter your Username, Password, and Server URL exactly as provided by us."
+      "Enter your Username, Password, and Server URL exactly as provided."
     ]
   },
   {
     id: "ibo-player",
     title: "IBO Player Setup",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "3 mins",
@@ -85,7 +85,7 @@ const guides = [
   {
     id: "xciptv",
     title: "XCIPTV Setup",
-    icon: <MonitorPlay className="h-6 w-6 text-brand" />,
+    icon: <MonitorPlay className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "3 mins",
@@ -99,7 +99,7 @@ const guides = [
   {
     id: "apple-tv",
     title: "Apple TV & iOS",
-    icon: <Smartphone className="h-6 w-6 text-brand" />,
+    icon: <Smartphone className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/4009409/pexels-photo-4009409.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "3 mins",
@@ -113,7 +113,7 @@ const guides = [
   {
     id: "mag-box",
     title: "MAG Box Setup",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-[#F2C847]" />,
     image: "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Medium",
     time: "5 mins",
@@ -121,7 +121,7 @@ const guides = [
       "Go to Settings > System Settings > Servers > Portals.",
       "Set Portal 1 Name to 'iflexiptv' and Portal 1 URL to the MAG Portal URL we provided.",
       "Save the settings and restart your portal.",
-      "Ensure you have sent us your MAC address starting with 00:1A:79... so we can activate it."
+      "Ensure you have sent us your MAC address starting with 00:1A:79 so we can activate it."
     ]
   }
 ];
@@ -142,7 +142,7 @@ export default function GuidesPage() {
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-white/5">
+      <section className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24 border-b border-white/[0.05]">
         <div className="absolute inset-0 -z-20 bg-black">
           <Image
             src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
@@ -152,34 +152,37 @@ export default function GuidesPage() {
             className="object-cover opacity-20 blur-[2px]"
           />
         </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/90 to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/80 to-transparent" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">Setup Guides for Every Device</h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Follow these simple, step-by-step instructions to get your IPTV running in less than 5 minutes. No technical skills required.
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-strong text-xs font-bold text-[#F2C847] tracking-wider uppercase mb-6">
+              <Sparkles className="h-3 w-3" />
+              Step-by-Step Guides
+            </div>
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-white">Setup Guides for Every Device</h1>
+            <p className="mt-6 text-lg leading-8 text-white/50">
+              Follow these simple instructions to get your IPTV running in less than 5 minutes. No technical skills required.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           
           <div className="grid lg:grid-cols-2 gap-8">
-            {guides.map((guide, idx) => (
-              <div key={guide.id} id={guide.id} className="luxury-surface rounded-[2rem] overflow-hidden flex flex-col group hover:border-brand/40 transition-colors scroll-mt-24">
+            {guides.map((guide) => (
+              <div key={guide.id} id={guide.id} className="glass rounded-[2rem] overflow-hidden flex flex-col group border border-white/[0.06] hover:border-[#F2C847]/30 transition-all duration-300 scroll-mt-24">
                 
-                {/* Guide Image Header */}
-                <div className="relative h-48 sm:h-56 w-full bg-card">
+                <div className="relative h-48 sm:h-56 w-full">
                   <Image src={guide.image} alt={guide.title} fill className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                   <div className="absolute top-4 right-4 flex gap-2">
                     <span className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
-                      <Zap className="h-3 w-3 text-brand" /> {guide.difficulty}
+                      <Zap className="h-3 w-3 text-[#F2C847]" /> {guide.difficulty}
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
-                      <Clock className="h-3 w-3 text-brand" /> {guide.time}
+                      <Clock className="h-3 w-3 text-[#F2C847]" /> {guide.time}
                     </span>
                   </div>
                   <div className="absolute bottom-4 left-6 right-6 flex items-center gap-3">
@@ -190,24 +193,22 @@ export default function GuidesPage() {
                   </div>
                 </div>
                 
-                {/* Steps Content */}
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
                   <ol className="space-y-5 mb-8 flex-1">
                     {guide.steps.map((step, i) => (
                       <li key={i} className="flex gap-4">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/20 font-bold text-brand text-xs">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F2C847]/20 font-bold text-[#F2C847] text-xs">
                           {i + 1}
                         </span>
-                        <span className="text-muted-foreground text-sm leading-relaxed">{step}</span>
+                        <span className="text-white/50 text-sm leading-relaxed">{step}</span>
                       </li>
                     ))}
                   </ol>
                   
-                  {/* WhatsApp CTA per Guide */}
                   <div className="mt-auto pt-6 border-t border-white/5">
                     <Link
-                      href="https://wa.me/1234567890"
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-success/10 px-4 py-3 text-sm font-bold text-success transition hover:bg-success hover:text-background border border-success/20"
+                      href="https://wa.me/447828714977"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#22C55E]/10 px-4 py-3 text-sm font-bold text-[#22C55E] transition-all hover:bg-[#22C55E] hover:text-black border border-[#22C55E]/20"
                     >
                       <MessageCircle className="h-4 w-4" /> Need help? Message Support
                     </Link>
@@ -218,21 +219,22 @@ export default function GuidesPage() {
             ))}
           </div>
 
-          <div className="mt-24 text-center luxury-surface rounded-3xl p-8 md:p-12 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Device not listed here?</h3>
-            <p className="text-muted-foreground mb-8">We support almost any device with a screen and an internet connection. Check our blog for more detailed guides or contact our 24/7 technical support.</p>
+          <div className="mt-24 text-center glass rounded-3xl p-8 md:p-12 max-w-4xl mx-auto border border-white/[0.06]">
+            <h3 className="text-2xl font-bold text-white mb-4">Device not listed here?</h3>
+            <p className="text-white/50 mb-8">We support almost any device with a screen and an internet connection. Check our blog for more detailed guides or contact our 24/7 technical support.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 href="/blog"
-                className="inline-flex h-14 items-center justify-center rounded-full border border-white/12 bg-white/8 px-8 text-base font-bold text-foreground transition hover:border-brand/40 hover:text-brand"
+                className="btn-outline inline-flex h-14 items-center justify-center rounded-full px-8 text-base"
               >
                 Browse Blog Guides
               </Link>
               <Link
-                href="https://wa.me/1234567890"
-                className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
+                href="https://wa.me/447828714977"
+                className="btn-premium inline-flex h-14 items-center justify-center gap-2 rounded-full px-8 text-base font-bold"
               >
-                <MessageCircle className="h-5 w-5" /> Ask on WhatsApp
+                <MessageCircle className="h-5 w-5 relative z-10" />
+                <span className="relative z-10">Ask on WhatsApp</span>
               </Link>
             </div>
           </div>

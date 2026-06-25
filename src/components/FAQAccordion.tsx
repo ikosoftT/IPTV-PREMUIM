@@ -1,44 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 type FAQItem = {
-  question: string;
-  answer: string;
+  q: string;
+  a: string;
 };
 
 export default function FAQAccordion({ items }: { items: FAQItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <div className="space-y-4">
-      {items.map((item, index) => (
-        <div key={index} className="overflow-hidden rounded-2xl border border-white/10 bg-white/6 shadow-lg shadow-black/15 backdrop-blur">
-          <button
-            className="w-full text-left px-6 py-5 flex justify-between items-center gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-            onClick={() => toggle(index)}
+    <div className="space-y-3">
+      {items.map((item, i) => {
+        const isOpen = openIndex === i;
+        return (
+          <div
+            key={i}
+            className={`glass rounded-2xl border transition-all duration-300 ${
+              isOpen
+                ? "border-[#F2C847]/20"
+                : "border-white/[0.06]"
+            }`}
           >
-            <span className="font-semibold text-foreground">{item.question}</span>
-            {openIndex === index ? (
-              <ChevronUp className="h-5 w-5 text-brand shrink-0" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-muted-foreground shrink-0" />
-            )}
-          </button>
-          {openIndex === index && (
-            <div className="px-6 pb-5 text-muted-foreground text-sm leading-6">
-              <div className="pt-4 border-t border-white/10">
-                {item.answer}
+            <button
+              onClick={() => setOpenIndex(isOpen ? null : i)}
+              className="flex items-center justify-between w-full p-5 sm:p-6 text-left"
+            >
+              <span className="text-sm sm:text-base font-bold text-white pr-4">{item.q}</span>
+              <ChevronRight
+                className={`h-4 w-4 text-[#F2C847] shrink-0 transition-transform duration-300 ${
+                  isOpen ? "rotate-90" : ""
+                }`}
+              />
+            </button>
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+                <p className="text-sm text-white/50 leading-relaxed">{item.a}</p>
               </div>
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
